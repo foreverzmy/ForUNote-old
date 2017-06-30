@@ -1,0 +1,67 @@
+// 配置
+$titlebar-background-color: #3E464C;
+$titlebar-height: 32px;
+$titlebar-title-color: #FFF;
+$titlebar-title-font-size: 16px;
+$titlebar-title-max-width: 60%;
+$titlebar-control-font-size: 24px;
+$titlebar-control-background-color-hover: lighten($titlebar-background-color, 12%);
+$titlebar-control-close-background-color-hover: #FF5252;
+// titlebar
+#titlebar {
+  width: 100%;
+  height: $titlebar-height;
+  background: $titlebar-background-color;
+  text-align: center;
+  -webkit-app-region: drag;
+  cursor: default;
+  position: relative;
+}
+
+#titlebar-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  -webkit-app-region: no-drag;
+}
+
+#titlebar-logo:hover {
+  background: $titlebar-control-background-color-hover;
+}
+
+#titlebar-title {
+  font-size: $titlebar-title-font-size;
+  color: $titlebar-title-color;
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: $titlebar-height;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: $titlebar-title-max-width;
+}
+
+#titlebar-control {
+  height: 100%;
+  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-app-region: no-drag;
+}
+
+#titlebar-control li {
+  float: left;
+  width: $titlebar-height;
+  height: 100%;
+  font-size: $titlebar-control-font-size;
+  line-height: $titlebar-height;
+}
+
+#titlebar-control li:hover {
+  background: $titlebar-control-background-color-hover;
+}
+
+#titlebar-control li:last-child:hover {
+  background: $titlebar-control-close-background-color-hover;
+}
