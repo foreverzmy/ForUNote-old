@@ -2,17 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { DialogComponent } from './component/dialog/dialog.component';
 import { TitleBarComponent } from './component/title-bar/title-bar.component';
+
+import { MainModele } from './component/main/main.module'
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent,
-    TitleBarComponent
+    TitleBarComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MainModele,
   ],
   providers: [],
   bootstrap: [AppComponent]
