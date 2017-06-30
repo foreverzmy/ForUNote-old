@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run watch && npm run electron",
+    "start": "npm run watch",
     "electron": "electron .",
     "test": "ng test",
     "lint": "ng lint",

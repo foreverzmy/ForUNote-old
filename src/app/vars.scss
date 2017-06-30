@@ -32,3 +32,58 @@ $preview-padding-right: 20px; // 初始化
 .color-tip {
   opacity: .67;
 }
+
+.github {
+  color: #999999;
+}
+
+.github:hover {
+  color: #FF4081;
+}
+
+.horizontal-space-normal {
+  margin-left: 10px;
+}
+
+.horizontal-space-large {
+  margin-left: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.invisible {
+  z-index: -10000;
+  position: absolute;
+  visibility: hidden;
+  left: -10000px;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.radio-group .radio-group-item[selected] {
+  background: #dce1e6;
+}
+
+.checkbox[checked] {
+  background: #dce1e6;
+}
