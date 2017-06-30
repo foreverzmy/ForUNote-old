@@ -2,9 +2,9 @@
   <img id="titlebar-logo" src="assets/logo.png" onclick="win.about()" />
   <p id="titlebar-title">蜉蝣笔记，享受书写的乐趣</p>
   <ul id="titlebar-control">
-    <li class="material-icons" (click)='toogleFullScreen()'>fullscreen</li>
-    <li class="material-icons" (click)="minimize()">remove</li>
-    <li class="material-icons" (click)="toggleMaximize()">crop_square</li>
-    <li class="material-icons" (click)="preClose()">close</li>
+    <li class="material-icons" title="全屏" (click)='toogleFullScreen()'>fullscreen</li>
+    <li class="material-icons" title="最小化" (click)="minimize()">remove</li>
+    <li class="material-icons" title="最大化" (click)="toggleMaximize()">crop_square</li>
+    <li class="material-icons" title="关闭" (click)="preClose()">close</li>
   </ul>
 </div>
