@@ -5,6 +5,7 @@ import { MainComponent } from './main.component';
 import { EditComponent } from './edit/edit.component';
 import { PreviewComponent } from './preview/preview.component';
 
+import { EditService } from '../../service/edit.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,8 @@ import { PreviewComponent } from './preview/preview.component';
     EditComponent,
     PreviewComponent,
   ],
-  providers: []
+  providers: [
+    EditService
+  ]
 })
 export class MainModele { }

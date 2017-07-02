@@ -1,3 +1,25 @@
-<p>
-  preview works!
-</p>
+<div id="preview-container">
+  <div id="preview-toolbar" class="toolbar">
+    <ul class="float-left">
+      <li class="material-icons toolbar-item" title="预览模式" onclick="preview.toggleMaximize()">visibility
+      </li>
+    </ul>
+    <ul class="float-left horizontal-space-large">
+      <li class="material-icons toolbar-item " title="以html导出" selected>code</li>
+      <li class="material-icons toolbar-item " title="以pdf导出" onclick="preview.export2pdf()">
+        picture_as_pdf
+      </li>
+    </ul>
+    <ul id="align-radio-group" class="float-left horizontal-space-large radio-group">
+      <li class="material-icons toolbar-item radio-group-item" title="左对齐" selected>format_align_left</li>
+      <li class="material-icons toolbar-item radio-group-item" title="居中对齐">format_align_center</li>
+      <li class="material-icons toolbar-item radio-group-item" title="右对齐">format_align_right</li>
+    </ul>
+    <ul class="float-right">
+      <li id="content-checkbox" class="material-icons toolbar-item checkbox" title="目录">view_headline</li>
+    </ul>
+  </div>
+  <div id="preview-wrap">
+    <div id="preview"></div>
+  </div>
+</div>

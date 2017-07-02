@@ -1,10 +1,5 @@
-declare global {
-  interface Window {
-    require: any;
-  }
-}
 import { Component, OnInit } from '@angular/core';
-const electron = window.require('electron');
+import * as electron from 'electron';
 
 @Component({
   selector: 'app-title-bar',
