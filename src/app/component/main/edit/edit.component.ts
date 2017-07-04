@@ -40,43 +40,43 @@ export class EditComponent implements OnInit {
   }
   // 斜体
   italic() {
-
+    this.codeRef.appendSymmetricInlineChar('*');
   }
   // 分割线
   hr() {
-
+    this.codeRef.appendBlockChar('---\n\n', 2);
   }
   // 引用
   quotation() {
-
+    this.codeRef.appendBlockChar('>', 0, 3);
   }
   // 代码
   code() {
-
+    this.codeRef.appendCodeChar();
   }
   // 数学公式
   math() {
-
+    this.codeRef.appendMathChar();
   }
   // 链接
   link() {
-
+    this.codeRef.appendInlineChar('[]()', 1);
   }
   // 图片
   image() {
-
+    this.codeRef.appendBlockChar('![]()', 0, 2);
   }
   // 表格
   table() {
-
+    this.codeRef.appendTableChar();
   }
   // 有序列表
   ol() {
-
+    this.codeRef.appendBlockChar('1.', 0, 3);
   }
   // 无序列表
   ul() {
-
+    this.codeRef.appendBlockChar('*', 0, 3);
   }
 
 }

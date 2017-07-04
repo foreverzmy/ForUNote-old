@@ -66,6 +66,25 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  newlineIfNeed() {
+    const pos = this.doc.getCursor();
+    let { line } = pos;
+    const { ch } = pos;
+    if (ch !== 0 && this.doc.getLine(line).trim() !== '') {
+      line += 2;
+    }
+    if (this.doc.lastLine() < line) {
+      this.doc.replaceRange('\n\n', {
+        'line': line,
+        'ch': ch
+      })
+    }
+    return {
+      line: line,
+      ch: 0,
+    }
+  }
+
   // 添加对称的行内符号
   appendSymmetricInlineChar(symbol: string) {
     if (this.doc.somethingSelected()) {
@@ -100,6 +119,45 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
     }
     this.instance.focus();
   }
+
+  // 添加行间符号
+  appendBlockChar(symbol: string, lineOffset: number, ch?: number) {
+    const pos = this.newlineIfNeed();
+    this.doc.replaceRange(symbol + ' ', pos);
+    this.doc.setCursor({
+      'line': lineOffset ? (pos.line + lineOffset) : pos.line,
+      'ch': typeof (ch) === 'undefined' ? 0 : ch,
+    });
+    this.instance.focus();
+  }
+
+  // 添加表格符号
+  appendTableChar() {
+    const pos = this.newlineIfNeed();
+    this.appendBlockChar('|    列1    |    列2    |    列3    |\n|--------- |--------- |--------- |\n|    行1    |    行1    |    行1    |', 2)
+  }
+
+  // 添加代码符号
+  appendCodeChar() {
+    const pos = this.newlineIfNeed();
+    this.doc.replaceRange('```js\n\n```', pos);
+    this.doc.setCursor({
+      'line': pos.line + 1,
+      'ch': 0,
+    })
+    this.instance.focus();
+  }
+
+  // 添加数学符号
+  appendMathChar() {
+    const pos = this.newlineIfNeed();
+    this.doc.replaceRange('$$\n\n$$', pos);
+    this.doc.setCursor({
+      'line': pos.line + 1,
+      'ch': 0
+    })
+  }
+
 
   // 添加非对称行内符号
   appendInlineChar(symbol: string, chOffset: number) {
