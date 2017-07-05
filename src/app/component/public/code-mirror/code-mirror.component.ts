@@ -1,5 +1,18 @@
-import { Component, OnInit, Input, Output, ElementRef, ViewChild, EventEmitter, forwardRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  ElementRef,
+  ViewChild,
+  EventEmitter,
+  forwardRef,
+  AfterViewInit,
+  OnDestroy
+} from '@angular/core';
+import {
+  NG_VALUE_ACCESSOR
+} from '@angular/forms';
 import * as CodeMirror from 'codemirror';
 
 @Component({
@@ -24,9 +37,11 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
 
   public doc: CodeMirror.Doc;
 
-  constructor() { }
+  constructor() {}
 
-  get value() { return this.content; }
+  get value() {
+    return this.content;
+  }
 
   @Input() set value(v) {
     if (v !== this.content) {
@@ -54,22 +69,32 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
     });
 
     this.instance.on('focus', (event) => {
-      this.focus.emit({ event });
+      this.focus.emit({
+        event
+      });
     });
 
     this.instance.on('cursorActivity', (instance) => {
-      this.cursorActivity.emit({ instance });
+      this.cursorActivity.emit({
+        instance
+      });
     });
 
     this.instance.on('blur', (event) => {
-      this.blur.emit({ event });
+      this.blur.emit({
+        event
+      });
     });
   }
 
   newlineIfNeed() {
     const pos = this.doc.getCursor();
-    let { line } = pos;
-    const { ch } = pos;
+    let {
+      line
+    } = pos;
+    const {
+      ch
+    } = pos;
     if (ch !== 0 && this.doc.getLine(line).trim() !== '') {
       line += 2;
     }
@@ -121,7 +146,7 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
   }
 
   // 添加行间符号
-  appendBlockChar(symbol: string, lineOffset: number, ch?: number) {
+  appendBlockChar(symbol: string, lineOffset: number, ch ? : number) {
     const pos = this.newlineIfNeed();
     this.doc.replaceRange(symbol + ' ', pos);
     this.doc.setCursor({
@@ -187,8 +212,12 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
       this.instance.setValue(this.content);
     }
   }
-  onChange(_) { }
-  onTouched() { }
-  registerOnChange(fn) { this.onChange = fn; }
-  registerOnTouched(fn) { this.onTouched = fn; }
+  onChange(_) {}
+  onTouched() {}
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
 }

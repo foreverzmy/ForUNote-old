@@ -1,6 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {  Component,OnInit,
+  ViewChild
+} from '@angular/core';
 
 import * as CodeMirror from 'codemirror';
+
+import { HotKeyService } from '../../service/hot-key.service';
 
 @Component({
   selector: 'app-edit',
@@ -12,7 +16,7 @@ export class EditComponent implements OnInit {
   public config: CodeMirror.EditorConfiguration;
   public content;
 
-  constructor() {
+  constructor(_hotKey: HotKeyService) {
     this.config = {
       mode: 'gfm',
       lineNumbers: true,
@@ -33,6 +37,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._hotKey.addHotKey('ctrl + b', this.bold)
   }
   // 加粗
   bold() {

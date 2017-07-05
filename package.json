@@ -11,7 +11,8 @@
     "watch": "webpack --watch true",
     "build": "webpack",
     "start": "webpack-dev-server --port=4200",
-    "pree2e": "webdriver-manager update --standalone false --gecko false --quiet"
+    "pree2e": "webdriver-manager update --standalone false --gecko false --quiet",
+    "packageWin": "electron-packager ./ FouUNote --win --out package  --arch=x64 --version 1.6.11 --overwrite  --app-version=0.0.1 --ignore=\"(src|NiceMar|e2e)\""
   },
   "main": "index.js",
   "private": true,
