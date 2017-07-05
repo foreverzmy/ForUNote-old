@@ -7,6 +7,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { PublicModule } from '../public/public.module';
 
 import { EditService } from '../../service/edit.service';
+import { HotKeyService } from '../../service/hot-key.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { EditService } from '../../service/edit.service';
     PreviewComponent,
   ],
   providers: [
-    EditService
+    EditService,
+    HotKeyService
   ]
 })
 export class MainModele { }

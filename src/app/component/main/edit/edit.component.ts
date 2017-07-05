@@ -1,10 +1,8 @@
-import {  Component,OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 
 import * as CodeMirror from 'codemirror';
 
-import { HotKeyService } from '../../service/hot-key.service';
+import { HotKeyService } from '../../../service/hot-key.service';
 
 @Component({
   selector: 'app-edit',
@@ -16,7 +14,19 @@ export class EditComponent implements OnInit {
   public config: CodeMirror.EditorConfiguration;
   public content;
 
-  constructor(_hotKey: HotKeyService) {
+  constructor(
+    public _render: Renderer2,
+    public _hotKey: HotKeyService
+  ) {
+    this.initCodeMirror();
+  }
+
+  ngOnInit() {
+    // this._hotKey.addHotKey('ctrl + b', this.bold);
+    this.keyDown();
+  }
+
+  initCodeMirror() {
     this.config = {
       mode: 'gfm',
       lineNumbers: true,
@@ -36,9 +46,24 @@ export class EditComponent implements OnInit {
     this.content = `// ... some code !`
   }
 
-  ngOnInit() {
-    this._hotKey.addHotKey('ctrl + b', this.bold)
+  keyDown() {
+    this._hotKey.addHotKey('ctrl + b', 'bold');
+    this._hotKey.addHotKey('ctrl + I', 'italic');
+    this._render.listen('document', 'keydown', e => {
+      let code = e.keyCode;
+      if (e.shiftKey) {
+        code += this._hotKey.SHIFT_CODE;
+      }
+      if (e.ctrlKey) {
+        code += this._hotKey.CTRL_CODE;
+      }
+      if (e.altKey) {
+        code += this._hotKey.ALT_CODE;
+      }
+      this[this._hotKey.hotKeyMap[code]]();
+    })
   }
+
   // 加粗
   bold() {
     this.codeRef.appendSymmetricInlineChar('**');
