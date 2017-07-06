@@ -13,7 +13,7 @@ export class HotKeyService {
 
   constructor() { }
 
-  addHotKey(hotKey: string, cb) {
+  addHotKey(hotKey: string, cb: string) {
     hotKey = hotKey.replace(/\s+/g, '').toLocaleLowerCase();
     let code = 0;
     if (hotKey.match(/\+/)) {
@@ -39,7 +39,6 @@ export class HotKeyService {
     this.hotKeyMap[code] = cb;
     // keyCode : 0~9 = 48~57, a~z = 65~90, f1~f12 = 112~123
     // unicode: 0~9 = 48~57, a~z = 97 ~ 122
-
   }
 
 

@@ -56,6 +56,7 @@ export class EditComponent implements OnInit {
       };
     })
   }
+
   // 加粗
   bold() {
     this.codeRef.appendSymmetricInlineChar('**');
