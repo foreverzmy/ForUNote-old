@@ -1,17 +1,8 @@
-import {
-  Injectable,
-  Renderer
-} from '@angular/core';
-import {
-  Http
-} from '@angular/http';
-import {
-  Observable
-} from 'rxjs/observable';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-
 
 @Injectable()
 export class HotKeyService {
@@ -20,10 +11,7 @@ export class HotKeyService {
   public CTRL_CODE = 2000;
   public ALT_CODE = 4000;
 
-  constructor(
-    public render: Renderer
-  ) {
-  }
+  constructor() { }
 
   addHotKey(hotKey: string, cb) {
     hotKey = hotKey.replace(/\s+/g, '').toLocaleLowerCase();
@@ -51,11 +39,6 @@ export class HotKeyService {
     this.hotKeyMap[code] = cb;
     // keyCode : 0~9 = 48~57, a~z = 65~90, f1~f12 = 112~123
     // unicode: 0~9 = 48~57, a~z = 97 ~ 122
-    this.render.listenGlobal('document', 'keydown', e => {
-      console.log(e)
-    })
-
-
 
   }
 

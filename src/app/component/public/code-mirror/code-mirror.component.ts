@@ -10,9 +10,7 @@ import {
   AfterViewInit,
   OnDestroy
 } from '@angular/core';
-import {
-  NG_VALUE_ACCESSOR
-} from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as CodeMirror from 'codemirror';
 
 @Component({
@@ -37,7 +35,7 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
 
   public doc: CodeMirror.Doc;
 
-  constructor() {}
+  constructor() { }
 
   get value() {
     return this.content;
@@ -146,7 +144,7 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
   }
 
   // 添加行间符号
-  appendBlockChar(symbol: string, lineOffset: number, ch ? : number) {
+  appendBlockChar(symbol: string, lineOffset: number, ch?: number) {
     const pos = this.newlineIfNeed();
     this.doc.replaceRange(symbol + ' ', pos);
     this.doc.setCursor({
@@ -212,8 +210,8 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
       this.instance.setValue(this.content);
     }
   }
-  onChange(_) {}
-  onTouched() {}
+  onChange(_) { }
+  onTouched() { }
   registerOnChange(fn) {
     this.onChange = fn;
   }

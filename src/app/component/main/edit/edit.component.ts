@@ -1,10 +1,6 @@
-import {  Component,OnInit,
-  ViewChild
-} from '@angular/core';
-
+import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import * as CodeMirror from 'codemirror';
-
-import { HotKeyService } from '../../service/hot-key.service';
+import { HotKeyService } from '../../../service/hot-key.service';
 
 @Component({
   selector: 'app-edit',
@@ -15,8 +11,10 @@ export class EditComponent implements OnInit {
   @ViewChild('codeRef') codeRef;
   public config: CodeMirror.EditorConfiguration;
   public content;
-
-  constructor(_hotKey: HotKeyService) {
+  constructor(
+    public _hotKeyService: HotKeyService,
+    public _renderer: Renderer2
+  ) {
     this.config = {
       mode: 'gfm',
       lineNumbers: true,
@@ -37,7 +35,26 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._hotKey.addHotKey('ctrl + b', this.bold)
+    this._hotKeyService.addHotKey('ctrl + b', this.bold);
+    this.listen();
+  }
+
+  listen() {
+    this._renderer.listen('document', 'keydown', e => {
+      let code = e.keyCode;
+      if (e.shiftKey) {
+        code += this._hotKeyService.SHIFT_CODE;
+      }
+      if (e.ctrlKey) {
+        code += this._hotKeyService.CTRL_CODE;
+      }
+      if (e.altKey) {
+        code += this._hotKeyService.ALT_CODE;
+      }
+      if (this._hotKeyService.hotKeyMap[code]) {
+        // 调用函数
+      };
+    })
   }
   // 加粗
   bold() {

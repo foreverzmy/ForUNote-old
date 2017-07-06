@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CodeMirrorComponent } from './code-mirror/code-mirror.component';
+import { MarkedComponent } from './marked/marked.component';
 
 /**
  * CodemirrorModule
@@ -12,9 +13,11 @@ import { CodeMirrorComponent } from './code-mirror/code-mirror.component';
   ],
   declarations: [
     CodeMirrorComponent,
+    MarkedComponent,
   ],
   exports: [
     CodeMirrorComponent,
+    MarkedComponent,
   ]
 })
 
