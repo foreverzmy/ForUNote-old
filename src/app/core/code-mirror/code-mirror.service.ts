@@ -1,71 +1,33 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  ElementRef,
-  ViewChild,
-  EventEmitter,
-  forwardRef,
-  AfterViewInit,
-  OnDestroy
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Injectable, ElementRef, EventEmitter } from '@angular/core';
+
 import * as CodeMirror from 'codemirror';
 
-@Component({
-  selector: 'app-code-mirror',
-  templateUrl: './code-mirror.component.html',
-  styleUrls: ['./code-mirror.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => CodeMirrorComponent),
-    multi: true
-  }]
-})
-export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
-  @Input() config: CodeMirror.EditorConfiguration;
-  @Output() change = new EventEmitter();
-  @Output() focus = new EventEmitter();
-  @Output() blur = new EventEmitter();
-  @Output() cursorActivity = new EventEmitter();
-  @Output() instance: CodeMirror.Editor;
-  @ViewChild('host') host;
-  @Input() content;
-
+@Injectable()
+export class CodeMirrorService {
+  public content = `// ... some code !`;
   public doc: CodeMirror.Doc;
-
+  public instance: CodeMirror.Editor;
+  public focus = new EventEmitter();
+  public blur = new EventEmitter();
+  public cursorActivity = new EventEmitter();
   constructor() { }
 
   get value() {
     return this.content;
   }
-
-  @Input() set value(v) {
+  set value(v) {
     if (v !== this.content) {
       this.content = v;
-      this.onChange(v);
     }
   }
 
-  ngAfterViewInit() {
-    this.config = this.config || {};
-    this.codemirrorInit(this.config);
-  }
-
-  ngOnDestroy() {
-
-  }
-
-  codemirrorInit(config) {
-    this.instance = CodeMirror.fromTextArea(this.host.nativeElement, config);
+  codemirrorInit(el, config) {
+    this.instance = CodeMirror.fromTextArea(el, config);
     this.instance.setValue(this.content);
     this.doc = this.instance.getDoc();
-
     this.instance.on('change', () => {
       this.updateValue(this.instance.getValue());
     });
-
     this.instance.on('focus', (event) => {
       this.focus.emit({
         event
@@ -83,6 +45,12 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
         event
       });
     });
+  }
+
+  updateValue(value) {
+    this.value = value;
+    this.onTouched();
+    // this.change.emit(value);
   }
 
   newlineIfNeed() {
@@ -192,18 +160,10 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
     });
     this.instance.focus();
   }
-  /**
-   * Value update process
-   */
-  updateValue(value) {
-    this.value = value;
-    this.onTouched();
-    this.change.emit(value);
-  }
 
   /**
-   * Implements ControlValueAccessor
-   */
+ * Implements ControlValueAccessor
+ */
   writeValue(value) {
     this.content = value || '';
     if (this.instance) {
@@ -218,4 +178,5 @@ export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
   registerOnTouched(fn) {
     this.onTouched = fn;
   }
+
 }

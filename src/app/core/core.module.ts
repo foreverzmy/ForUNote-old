@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { CodeMirrorService } from './code-mirror/code-mirror.service';
+
 import { CodeMirrorComponent } from './code-mirror/code-mirror.component';
 import { MarkedComponent } from './marked/marked.component';
 
@@ -18,7 +20,10 @@ import { MarkedComponent } from './marked/marked.component';
   exports: [
     CodeMirrorComponent,
     MarkedComponent,
+  ],
+  providers: [
+    CodeMirrorService,
   ]
 })
 
-export class PublicModule { }
+export class CoreModule { }
