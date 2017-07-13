@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { CodeMirrorService } from '../code-mirror/code-mirror.service';
+import { MarkedService } from './marked.service';
 import * as marked from 'marked';
 
 @Component({
@@ -8,22 +9,23 @@ import * as marked from 'marked';
   styleUrls: ['./marked.component.scss']
 })
 export class MarkedComponent implements OnInit, AfterViewInit {
-  public marked;
-  public config: Object;
   public content: string;
   constructor(
     public _codemirror: CodeMirrorService,
+    public _marked: MarkedService,
   ) { }
 
   ngOnInit() {
-    this.config = {};
-    this.marked = marked.setOptions(this.config);
     this._codemirror.change.subscribe(x => {
-      this.content = this.marked.parse(x);
+      this.content = this._marked.parse(x);
     })
   }
 
   ngAfterViewInit() {
+  }
+
+  openExternal(href) {
+    console.log(href);
   }
 
 }
