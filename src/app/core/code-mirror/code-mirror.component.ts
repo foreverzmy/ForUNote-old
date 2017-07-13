@@ -18,14 +18,32 @@ import { CodeMirrorService } from './code-mirror.service';
     multi: true
   }]
 })
-export class CodeMirrorComponent implements AfterViewInit, OnDestroy {
-  @Input() config: CodeMirror.EditorConfiguration;
+export class CodeMirrorComponent implements OnInit, AfterViewInit, OnDestroy {
+  config: CodeMirror.EditorConfiguration;
   @ViewChild('host') host;
 
   constructor(
     public _service: CodeMirrorService,
   ) { }
 
+  ngOnInit() {
+    this.config = {
+      mode: 'gfm',
+      lineNumbers: true,
+      lineWrapping: true,
+      theme: 'nicemark',
+      autofocus: true,
+      fixedGutter: true,
+      dragDrop: false,
+      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+      extraKeys: {
+        'Enter': 'newlineAndIndentContinueMarkdownList',
+        'Ctrl-Q': function (cm) {
+          cm.foldCode(cm.getCursor());
+        }
+      }
+    };
+  }
   ngAfterViewInit() {
     this.config = this.config || {};
     this._service.codemirrorInit(this.host.nativeElement, this.config);

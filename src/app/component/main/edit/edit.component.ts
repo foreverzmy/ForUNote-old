@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
-import * as CodeMirror from 'codemirror';
 import { HotKeyService } from '../../../service/hot-key.service';
 import { CodeMirrorService } from '../../../core/code-mirror/code-mirror.service';
 
@@ -9,31 +8,12 @@ import { CodeMirrorService } from '../../../core/code-mirror/code-mirror.service
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-  // @ViewChild('codeRef') codeRef;
-  public config: CodeMirror.EditorConfiguration;
   public content;
   constructor(
     public _hotKey: HotKeyService,
     public _codemirror: CodeMirrorService,
     public _renderer: Renderer2
-  ) {
-    this.config = {
-      mode: 'gfm',
-      lineNumbers: true,
-      lineWrapping: true,
-      theme: 'nicemark',
-      autofocus: true,
-      fixedGutter: true,
-      dragDrop: false,
-      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-      extraKeys: {
-        'Enter': 'newlineAndIndentContinueMarkdownList',
-        'Ctrl-Q': function (cm) {
-          cm.foldCode(cm.getCursor());
-        }
-      }
-    };
-  }
+  ) { }
 
   ngOnInit() {
     // this.listen();

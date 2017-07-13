@@ -6,12 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./preview.component.scss']
 })
 export class PreviewComponent implements OnInit {
-  public config;
-  constructor() {
-    this.config = {
-
-    }
-  }
+  constructor() { }
 
   ngOnInit() {
 

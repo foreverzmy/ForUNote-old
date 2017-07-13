@@ -9,13 +9,14 @@ import * as marked from 'marked';
 })
 export class MarkedComponent implements OnInit, AfterViewInit {
   public marked;
-  @Input() config;
+  public config: Object;
   public content: string;
   constructor(
     public _codemirror: CodeMirrorService,
   ) { }
 
   ngOnInit() {
+    this.config = {};
     this.marked = marked.setOptions(this.config);
     this._codemirror.change.subscribe(x => {
       this.content = this.marked.parse(x);
