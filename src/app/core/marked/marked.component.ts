@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { CodeMirrorService } from '../code-mirror/code-mirror.service';
 import * as marked from 'marked';
 
 @Component({
@@ -10,11 +11,15 @@ export class MarkedComponent implements OnInit, AfterViewInit {
   public marked;
   @Input() config;
   public content: string;
-  constructor() { }
+  constructor(
+    public _codemirror: CodeMirrorService,
+  ) { }
 
   ngOnInit() {
     this.marked = marked.setOptions(this.config);
-    this.content = this.marked.parse(`# aaa`)
+    this._codemirror.change.subscribe(x => {
+      this.content = this.marked.parse(x);
+    })
   }
 
   ngAfterViewInit() {

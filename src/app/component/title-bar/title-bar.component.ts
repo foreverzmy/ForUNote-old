@@ -8,11 +8,9 @@ import * as electron from 'electron';
 })
 export class TitleBarComponent implements OnInit {
   public win = electron.remote.getCurrentWindow();
-  constructor() {
-  }
+  constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   minimize() {
     this.win.minimize();

@@ -7,6 +7,7 @@ export class CodeMirrorService {
   public content = `// ... some code !`;
   public doc: CodeMirror.Doc;
   public instance: CodeMirror.Editor;
+  public change = new EventEmitter();
   public focus = new EventEmitter();
   public blur = new EventEmitter();
   public cursorActivity = new EventEmitter();
@@ -18,6 +19,7 @@ export class CodeMirrorService {
   set value(v) {
     if (v !== this.content) {
       this.content = v;
+      this.updateValue(v);
     }
   }
 
@@ -50,7 +52,7 @@ export class CodeMirrorService {
   updateValue(value) {
     this.value = value;
     this.onTouched();
-    // this.change.emit(value);
+    this.change.emit(value);
   }
 
   newlineIfNeed() {
