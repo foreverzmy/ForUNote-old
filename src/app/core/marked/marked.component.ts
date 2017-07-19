@@ -16,8 +16,8 @@ export class MarkedComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this._codemirror.change.subscribe(x => {
-      this.content = this._marked.parse(x);
+    this._codemirror.change.subscribe(content => {
+      this.content = this._marked.parse(content);
     })
   }
 

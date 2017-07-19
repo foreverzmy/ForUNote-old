@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public _renderer: Renderer2,
+  ) { }
 
   ngOnInit() {
-
-
+    this._renderer.listen('body', 'click', e => {
+      return false;
+    })
   }
 
 

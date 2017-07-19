@@ -4,7 +4,7 @@ import * as CodeMirror from 'codemirror';
 
 @Injectable()
 export class CodeMirrorService {
-  public content = `// ... some code !`;
+  public content = '';
   public doc: CodeMirror.Doc;
   public instance: CodeMirror.Editor;
   public change = new EventEmitter();

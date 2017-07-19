@@ -35,11 +35,11 @@ export class MarkedService {
   }
 
   handleLink(href, title, text) {
-    return `<a href=${href} title=${title} onclick="return false;">${text}</a>`;
+    return `<a href=${href} title=${title}>${text}</a>`;
   }
 
   handleImage(href, title, text) {
-    return `<img src=${href} title=${text} onclick='utils.zoom(this)'/><i style='margin:8px auto 0 auto;display:table'>${text}</i>`;
+    return `<img src=${href} title=${text}/><i style='margin:8px auto 0 auto;display:table'>${text}</i>`;
   };
 
   highlight(code, language) {
